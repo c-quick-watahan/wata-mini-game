@@ -4,6 +4,13 @@ export interface Game {
   image: string;
   initial_array: string[];
   final_array: string[];
+  gameImages?: GameImages;
+}
+export interface GameImages {
+  id: string;
+  filename: string;
+  title?: string[];
+  imgFiles?: string[];
 }
 export const sampleGames: Game[] = [
   {
@@ -12,6 +19,12 @@ export const sampleGames: Game[] = [
     image: "puzzle.png",
     initial_array: ["piece1", "piece2", "piece3"],
     final_array: ["piece1", "piece2", "piece3"],
+    gameImages: {
+      id: "string",
+      filename: "sushi",
+      title: ["ウロコを書く", "3枚におろす", "皮を引く", "スライス"],
+      imgFiles: ["sushi_1.png", "sushi_2.png", "sushi_3.png", "sushi_4.png"],
+    },
   },
   {
     id: "2",
