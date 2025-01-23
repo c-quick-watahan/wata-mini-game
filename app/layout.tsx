@@ -24,10 +24,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className="flex h-screen flex-col md:overflow-hidden">
+        <div className="flex-grow p-6 md:overflow-y-auto md:p-12">
+          {children}
+        </div>
       </body>
     </html>
   );
