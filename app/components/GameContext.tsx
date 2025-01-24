@@ -35,43 +35,62 @@ export default function GameContext({ game }: { game: Game }) {
 
   // const sortables = imgFiles || [];
   const [activeSelection, setActiveSelection] = useState<string | null>(null);
-  // const [sortables, setSortables] = useState<string[]>(imgFiles || []);
-  const [sortables, setSortables] = useState<string[]>(() => {
-    // Thanks Copilot :)
-    const shuffled = (imgFiles ?? []).slice();
-    do {
-      shuffled.sort(() => Math.random() - 0.5);
-    } while (shuffled.every((item, index) => item === (imgFiles ?? [])[index]));
-    return shuffled;
-  });
+  const [sortables, setSortables] = useState<string[]>(imgFiles || []);
+  const [titles, setTitles] = useState<string[]>(title || []);
+  // const [sortables, setSortables] = useState<string[]>(() => {
+  //   // Thanks Copilot :)
+  //   const shuffled = (imgFiles ?? []).slice();
+  //   do {
+  //     shuffled.sort(() => Math.random() - 0.5);
+  //   } while (shuffled.every((item, index) => item === (imgFiles ?? [])[index]));
+  //   console.log("shuffled", shuffled);
+  //   return shuffled;
+  // });
+
+  useEffect(() => {
+    console.log(sortables);
+    if (JSON.stringify(sortables) === JSON.stringify(final_array)) {
+      console.log("equal");
+      setModalVisibility(true);
+    } else {
+      return;
+    }
+  }, [sortables]);
+
+  const [isModalVisible, setModalVisibility] = useState(false);
+
+  function flipModal() {
+    setModalVisibility(!isModalVisible);
+  }
 
   function handleDragStart(event: DragStartEvent) {
     console.log("event", event?.active?.id.toString());
     setActiveSelection(event?.active?.id.toString());
     return;
   }
-  const handleDragEnd = (event: DragEndEvent) => {
+  async function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
     if (over && active.id === over.id) {
       return;
     }
-    setSortables((items) => {
-      const oldIndex = items.findIndex((item) => item === active.id);
-      if (!over) {
-        return items;
-      }
-      const newIndex = items.findIndex((item) => item === over.id);
-      const newItems = [...items];
-      const arr = arrayMove(newItems, oldIndex, newIndex);
-      return arr;
-    });
-  };
+    const oldIndex = sortables.findIndex((item) => item === active.id);
+    if (!over) {
+      return;
+    }
+    const newIndex = sortables.findIndex((item) => item === over.id);
+    const newSortables = [...sortables];
+    const newTitles = [...titles];
+    const tempSortableArr = arrayMove(newSortables, oldIndex, newIndex);
+    const tempTileArr = arrayMove(newTitles, oldIndex, newIndex);
+    setSortables(tempSortableArr);
+    setTitles(tempTileArr);
+  }
   function handleDragOver(event: DragOverEvent) {
     const { active, over } = event;
     if (over && active.id === over.id) {
       return;
     } else if (over) {
-      console.log("OVER", over.id);
+      return;
     }
   }
   return (
@@ -90,8 +109,13 @@ export default function GameContext({ game }: { game: Game }) {
             id="drop"
             className="bg-red-400 h-auto flex gap-10 p-8 rounded content-center w-fit"
           >
-            {sortables?.map((id) => (
-              <SortableItem key={id} id={id} img={`/${filename}/${id}`} />
+            {sortables?.map((id, index) => (
+              <SortableItem
+                key={id}
+                id={id}
+                img={`/${filename}/${id}`}
+                title={titles?.[index] ?? ""}
+              />
             ))}
           </div>
         </SortableContext>
@@ -101,6 +125,16 @@ export default function GameContext({ game }: { game: Game }) {
           ) : null}
         </DragOverlay> */}
       </DndContext>
+      <dialog id="my_modal_1" className="modal" open={isModalVisible}>
+        <div className="modal-box">
+          <h1 className="font-bold text-lg">Good job!</h1>
+          <div className="modal-action">
+            <button className="btn" onClick={flipModal}>
+              Close
+            </button>
+          </div>
+        </div>
+      </dialog>
     </div>
   );
 }

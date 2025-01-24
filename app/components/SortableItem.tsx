@@ -4,7 +4,15 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import Image from "next/image";
 
-export default function SortableItem({ id, img }: { id: string; img: string }) {
+export default function SortableItem({
+  id,
+  img,
+  title,
+}: {
+  id: string;
+  img: string;
+  title: string;
+}) {
   const {
     attributes,
     listeners,
@@ -38,8 +46,10 @@ export default function SortableItem({ id, img }: { id: string; img: string }) {
       style={style}
       // className="bg-white p-2 w-auto h-auto rounded-md text-black"
     >
-      {/* <div>{id}</div> */}
-      <Image src={img} width={227} height={80} alt="sushi" />
+      <div className="min-h-full w-auto bg-white text-black text-center">
+        {title}
+        <Image src={img} width={227} height={80} alt="sushi" />
+      </div>
     </div>
   );
 }
