@@ -15,7 +15,7 @@ export interface GameImages {
 export const sampleGames: Game[] = [
   {
     id: "1",
-    name: "Puzzle Game",
+    name: "Sushi Game",
     image: "puzzle.png",
     initial_array: ["piece1", "piece2", "piece3"],
     final_array: ["piece1", "piece2", "piece3"],
