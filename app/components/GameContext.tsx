@@ -35,7 +35,15 @@ export default function GameContext({ game }: { game: Game }) {
 
   // const sortables = imgFiles || [];
   const [activeSelection, setActiveSelection] = useState<string | null>(null);
-  const [sortables, setSortables] = useState<string[]>(imgFiles || []);
+  // const [sortables, setSortables] = useState<string[]>(imgFiles || []);
+  const [sortables, setSortables] = useState<string[]>(() => {
+    // Thanks Copilot :)
+    const shuffled = (imgFiles ?? []).slice();
+    do {
+      shuffled.sort(() => Math.random() - 0.5);
+    } while (shuffled.every((item, index) => item === (imgFiles ?? [])[index]));
+    return shuffled;
+  });
 
   function handleDragStart(event: DragStartEvent) {
     console.log("event", event?.active?.id.toString());
