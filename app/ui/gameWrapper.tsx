@@ -12,7 +12,7 @@ export default function GameWrapper() {
       className="font-[family-name:var(--font-geist-sans)] flex justify-center content-center gap-4 flex-wrap"
     >
       {sampleGames.map((game, index) => (
-        <GameCard key={index} game={game} />
+        <GameCard key={index} game={game} url={"single-line-sortable"} />
       ))}
     </div>
   );
