@@ -1,6 +1,7 @@
 import { Game, sampleGames } from "@/app/interfaces/Game";
 import React from "react";
 import Image from "next/image";
+import GameContext from "@/app/components/GameContext";
 
 export default async function Page({
   params,
@@ -11,18 +12,9 @@ export default async function Page({
   const game = sampleGames.find((game) => game.id === id);
   const images = game?.gameImages;
   return (
-    <div>
-      {game?.name}
-      {id}
-      {images?.imgFiles?.map((image, index) => (
-        <Image
-          key={index}
-          src={`/${images.filename}/${images.filename}_${index}.png`}
-          width={227}
-          height={80}
-          alt="Watahan logo"
-        />
-      ))}
+    <div className="flex flex-col items-center">
+      <h1>{game?.name}</h1>
+      {game && <GameContext game={game} />}
     </div>
   );
 }

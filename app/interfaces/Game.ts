@@ -23,7 +23,7 @@ export const sampleGames: Game[] = [
       id: "string",
       filename: "sushi",
       title: ["ウロコを書く", "3枚におろす", "皮を引く", "スライス"],
-      imgFiles: ["sushi_1.png", "sushi_2.png", "sushi_3.png", "sushi_4.png"],
+      imgFiles: ["sushi_0.png", "sushi_1.png", "sushi_2.png", "sushi_3.png"],
     },
   },
   {

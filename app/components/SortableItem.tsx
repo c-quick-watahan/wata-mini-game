@@ -2,8 +2,9 @@
 import React from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import Image from "next/image";
 
-export default function SortableItem({ id }: { id: string }) {
+export default function SortableItem({ id, img }: { id: string; img: string }) {
   const {
     attributes,
     listeners,
@@ -16,17 +17,18 @@ export default function SortableItem({ id }: { id: string }) {
     transition: transition || undefined,
     transform: CSS.Transform.toString(transform),
   };
-  if (isDragging) {
-    return (
-      <div
-        ref={setNodeRef}
-        {...attributes}
-        {...listeners}
-        style={style}
-        className="bg-transparent border-white border-2 p-2 w-24 rounded-md text-black"
-      ></div>
-    );
-  }
+  // if (isDragging) {
+  //   console.log("dragging");
+  //   return (
+  //     <div
+  //       ref={setNodeRef}
+  //       {...attributes}
+  //       {...listeners}
+  //       style={style}
+  //       className="bg-transparent border-white border-2 p-2 w-24 rounded-md text-black"
+  //     ></div>
+  //   );
+  // }
 
   return (
     <div
@@ -34,9 +36,10 @@ export default function SortableItem({ id }: { id: string }) {
       {...attributes}
       {...listeners}
       style={style}
-      className="bg-white p-2 w-24 rounded-md text-black"
+      // className="bg-white p-2 w-auto h-auto rounded-md text-black"
     >
-      {id}
+      {/* <div>{id}</div> */}
+      <Image src={img} width={227} height={80} alt="sushi" />
     </div>
   );
 }
