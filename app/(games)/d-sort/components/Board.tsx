@@ -84,35 +84,26 @@ export default function Board() {
       onDragEnd={onDragEnd}
       onDragOver={onDragOver}
     >
-      {/* <SortableContext items={columnsId}> */}
-      <div
-        className="
-        m-auto
-        flex
-        min-h-screen
-        w-full
-        items-center
-        overflow-x-auto
-        overflow-y-hidden
-        px-[40px]
-      "
-      >
-        <div className="m-auto flex gap-4">
-          <div className="flex gap-4">
-            {rows.map((row) => (
-              <RowContainer
-                key={row.id}
-                row={row}
-                game={sampleGame}
-                sortables={sortables.filter(
-                  (sortable) => sortable.rowId === row.id
-                )}
-              />
-            ))}
+      <div id="Board" className="h-auto gap-10 p-8 rounded">
+        {rows.map((row) => (
+          <div
+            id="Row Container DIV"
+            key={row.id}
+            className="h-auto gap-2 p-8 rounded"
+          >
+            {/* min-width: -moz-available;
+  min-height: -moz-available; */}
+            <RowContainer
+              key={row.id}
+              row={row}
+              game={sampleGame}
+              sortables={sortables.filter(
+                (sortable) => sortable.rowId === row.id
+              )}
+            />
           </div>
-        </div>
+        ))}
       </div>
-      {/* </SortableContext> */}
       <DragOverlay>
         {activeRow && (
           <RowContainer

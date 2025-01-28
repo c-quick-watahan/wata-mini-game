@@ -19,16 +19,6 @@ import SortableItem from "./SortableItem";
 import { Game } from "../Game";
 
 export default function GameContext({ game }: { game: Game }) {
-  // id: "1",
-  // name: "Sushi Game",
-  // image: "puzzle.png",
-  // initial_array: ["piece1", "piece2", "piece3"],
-  // final_array: ["piece1", "piece2", "piece3"],
-  // gameImages: {
-  //   id: "string",
-  //   filename: "sushi",
-  //   title: ["ウロコを書く", "3枚におろす", "皮を引く", "スライス"],
-  //   imgFiles: ["sushi_1.png", "sushi_2.png", "sushi_3.png", "sushi_4.png"],
   const { id, name, initial_array, final_array, gameImages } = game;
 
   const { filename, title, imgFiles } = gameImages || {};
@@ -107,7 +97,7 @@ export default function GameContext({ game }: { game: Game }) {
         >
           <div
             id="drop"
-            className="bg-red-400 h-auto flex gap-10 p-8 rounded content-center w-fit"
+            className="h-auto flex gap-10 p-8 rounded content-center w-fit"
           >
             {sortables?.map((id, index) => (
               <SortableItem

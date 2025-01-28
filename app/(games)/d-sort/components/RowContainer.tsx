@@ -27,6 +27,7 @@ const RowContainer = (props: Props) => {
   const style = {
     transition: transition || undefined,
     transform: CSS.Transform.toString(transform),
+    width: "100%",
   };
 
   const rowIds = useMemo(() => {
@@ -35,44 +36,22 @@ const RowContainer = (props: Props) => {
 
   return (
     <div
+      id="Row Container"
+      className="inline-block border min-h-52"
       ref={setNodeRef}
       style={style}
-      className="
-    bg-columnBackgrounColor
-    w-[350px]
-    h-[500px]
-    max-h-[500px]
-    rounded-md
-    flex
-    // flex-col
-    "
     >
-      <div
-        className="
-      bg-mainBackgroundColor
-      textarea-md
-      cursor-grab
-      rounded-b-none
-      p-3
-      font-bold
-      border-columnBackgroundColor
-      border-4
-      "
-      >
-        <div {...attributes} {...listeners}>
-          <SortableContext items={sortables}>
-            {row.title}
-            {sortables.map((sortable) => (
-              <div key={sortable.id} className="flex gap-2">
-                <SortableCard
-                  key={sortable.id}
-                  sortable={sortable}
-                  game={game}
-                />
-              </div>
-            ))}
-          </SortableContext>
-        </div>
+      <div className="Row Container Context" {...attributes} {...listeners}>
+        <SortableContext items={sortables}>
+          {sortables.map((sortable) => (
+            <div
+              className="p-2 h-auto rounded-md text-black inline-block w-fit"
+              key={sortable.id}
+            >
+              <SortableCard key={sortable.id} sortable={sortable} game={game} />
+            </div>
+          ))}
+        </SortableContext>
       </div>
     </div>
   );

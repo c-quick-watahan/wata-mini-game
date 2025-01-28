@@ -26,8 +26,12 @@ export default function SortableCard({ sortable, game }: Props) {
     transform: CSS.Transform.toString(transform),
   };
   return (
-    <div ref={setNodeRef} style={style}>
-      <div {...attributes} {...listeners} className="flex flex-col gap-2">
+    <div id="Row div" ref={setNodeRef} style={style}>
+      <div
+        className="min-h-full w-auto text-white text-center"
+        {...attributes}
+        {...listeners}
+      >
         {sortable.title}
         <Image
           src={`/${game.filename}/${sortable.content}`}
