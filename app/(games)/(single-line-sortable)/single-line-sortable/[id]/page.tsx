@@ -1,6 +1,5 @@
-import { Game, sampleGames } from "@/app/interfaces/Game";
+import { sampleGames } from "@/app/interfaces/Game";
 import React from "react";
-import Image from "next/image";
 import GameContext from "@/app/components/GameContext";
 
 export default async function Page({
@@ -10,7 +9,6 @@ export default async function Page({
 }) {
   const { id } = await params;
   const game = sampleGames.find((game) => game.id === id);
-  const images = game?.gameImages;
   return (
     <div className="flex flex-col items-center">
       <h1>{game?.name}</h1>

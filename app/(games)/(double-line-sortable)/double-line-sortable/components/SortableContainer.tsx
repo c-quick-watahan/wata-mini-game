@@ -36,7 +36,7 @@ export default function SortableContainer({
       {" "}
       <div
         id="drop"
-        className="h-auto flex gap-10 p-8 rounded content-center w-fit"
+        className="bg-red-400 h-auto flex gap-10 p-8 rounded content-center w-fit"
       >
         {sortables?.map((id, index) => (
           <SortableItem

@@ -1,4 +1,4 @@
-import { Game, sampleGames } from "@/app/interfaces/Game";
+import { sampleGames } from "@/app/interfaces/Game";
 import React from "react";
 import GameContext from "../components/GameContext";
 

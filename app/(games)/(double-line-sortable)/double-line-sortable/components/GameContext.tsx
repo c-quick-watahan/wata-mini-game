@@ -4,27 +4,23 @@ import {
   DndContext,
   DragEndEvent,
   DragOverEvent,
-  DragOverlay,
   DragStartEvent,
 } from "@dnd-kit/core";
 import {
   arrayMove,
   horizontalListSortingStrategy,
   SortableContext,
-  verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { useEffect, useState } from "react";
 import { Game, Item } from "../Game";
-import SortableItem from "./SortableItem";
 import SortableContainer from "./SortableContainer";
 
 export default function GameContext({ game }: { game: Game }) {
-  const { id, name, initial_array, final_array, sortableItems } = game;
-  const [activeSelection, setActiveSelection] = useState<string | null>(null);
+  const { final_array, sortableItems } = game;
+  const [setActiveSelection] = useState<string | null>(null);
   const [sortables, setSortables] = useState<Item[]>(sortableItems || []);
 
   const [answerSortables, setAnswerSortables] = useState<string[]>(["1", "2"]);
-  const [answerTitles, setAnswerTitles] = useState<string[]>([]);
 
   useEffect(() => {
     console.log(sortables);

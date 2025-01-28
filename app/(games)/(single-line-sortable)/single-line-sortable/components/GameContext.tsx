@@ -1,25 +1,22 @@
 "use client";
 import {
-  closestCenter,
   closestCorners,
   DndContext,
   DragEndEvent,
   DragOverEvent,
-  DragOverlay,
   DragStartEvent,
 } from "@dnd-kit/core";
 import {
   arrayMove,
   horizontalListSortingStrategy,
   SortableContext,
-  verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { useEffect, useState } from "react";
 import SortableItem from "./SortableItem";
 import { Game } from "../Game";
 
 export default function GameContext({ game }: { game: Game }) {
-  const { id, name, initial_array, final_array, gameImages } = game;
+  const { final_array, gameImages } = game;
 
   const { filename, title, imgFiles } = gameImages || {};
 
@@ -97,7 +94,7 @@ export default function GameContext({ game }: { game: Game }) {
         >
           <div
             id="drop"
-            className="h-auto flex gap-10 p-8 rounded content-center w-fit"
+            className=" h-auto flex gap-10 p-8 rounded content-center w-fit"
           >
             {sortables?.map((id, index) => (
               <SortableItem
