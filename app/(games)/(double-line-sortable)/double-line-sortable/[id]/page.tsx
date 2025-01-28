@@ -9,11 +9,14 @@ export default async function Page({
 }) {
   const { id } = await params;
   const game = sampleGames.find((game) => game.id === id);
-  const images = game?.gameImages;
   return (
-    <div className="flex flex-col items-center">
-      <h1>{game?.name}</h1>
-      {game && <GameContext game={game} />}
-    </div>
+    <>
+      <div className="flex flex-col items-center">
+        <h1>{game?.name}</h1>
+        <div id="games" className="grid gap-32">
+          {game && <GameContext game={game} />}
+        </div>
+      </div>
+    </>
   );
 }

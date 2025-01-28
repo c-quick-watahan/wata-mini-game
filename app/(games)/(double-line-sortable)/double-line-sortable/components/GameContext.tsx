@@ -14,15 +14,17 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { useEffect, useState } from "react";
-import { Game } from "../Game";
+import { Game, Item } from "../Game";
 import SortableItem from "./SortableItem";
+import SortableContainer from "./SortableContainer";
 
 export default function GameContext({ game }: { game: Game }) {
-  const { id, name, initial_array, final_array, gameImages } = game;
-  const { filename, title, imgFiles } = gameImages || {};
+  const { id, name, initial_array, final_array, sortableItems } = game;
   const [activeSelection, setActiveSelection] = useState<string | null>(null);
-  const [sortables, setSortables] = useState<string[]>(imgFiles || []);
-  const [titles, setTitles] = useState<string[]>(title || []);
+  const [sortables, setSortables] = useState<Item[]>(sortableItems || []);
+
+  const [answerSortables, setAnswerSortables] = useState<string[]>(["1", "2"]);
+  const [answerTitles, setAnswerTitles] = useState<string[]>([]);
 
   useEffect(() => {
     console.log(sortables);
@@ -45,28 +47,76 @@ export default function GameContext({ game }: { game: Game }) {
     setActiveSelection(event?.active?.id.toString());
     return;
   }
-  async function handleDragEnd(event: DragEndEvent) {
-    const { active, over } = event;
-    if (over && active.id === over.id) {
-      return;
-    }
-    const oldIndex = sortables.findIndex((item) => item === active.id);
-    if (!over) {
-      return;
-    }
-    const newIndex = sortables.findIndex((item) => item === over.id);
-    const newSortables = [...sortables];
-    const newTitles = [...titles];
-    const tempSortableArr = arrayMove(newSortables, oldIndex, newIndex);
-    const tempTileArr = arrayMove(newTitles, oldIndex, newIndex);
-    setSortables(tempSortableArr);
-    setTitles(tempTileArr);
-  }
   function handleDragOver(event: DragOverEvent) {
     const { active, over } = event;
-    if (over && active.id === over.id) {
-      return;
-    } else if (over) {
+    console.log(event);
+
+    if (over && over.data.current)
+      if (over && active.id === over.id) {
+        return;
+      } else if (over) {
+        return;
+      }
+  }
+  async function handleDragEnd(event: DragEndEvent) {
+    const { active, over } = event;
+    //   if (over && active.id === over.id) {
+    //     return;
+    //   }
+    //   const oldIndex = sortables.findIndex((item) => item === active.id);
+    //   if (!over) {
+    //     return;
+    //   }
+    //   const newIndex = sortables.findIndex((item) => item === over.id);
+    //   const newSortables = [...sortables];
+    //   const newTitles = [...titles];
+    //   const tempSortableArr = arrayMove(newSortables, oldIndex, newIndex);
+    //   const tempTileArr = arrayMove(newTitles, oldIndex, newIndex);
+    //   setSortables(tempSortableArr);
+    //   setTitles(tempTileArr);
+    // }
+
+    if (over) {
+      const activeContainer = sortables.includes(active.id.toString())
+        ? sortables
+        : answerSortables;
+      const overContainer = sortables.includes(over.id.toString())
+        ? sortables
+        : answerSortables;
+
+      if (activeContainer === overContainer) {
+        const oldIndex = activeContainer.indexOf(active.id.toString());
+        const newIndex = overContainer.indexOf(over.id.toString());
+        const newTitles = [...titles];
+        const newItems = arrayMove(activeContainer, oldIndex, newIndex);
+        const tempTileArr = arrayMove(newTitles, oldIndex, newIndex);
+        if (activeContainer === sortables) {
+          setSortables(newItems);
+          setTitles(tempTileArr);
+        } else {
+          setAnswerSortables(newItems);
+        }
+      } else {
+        const activeIndex = activeContainer.indexOf(active.id.toString());
+        const overIndex = overContainer.indexOf(over.id.toString());
+
+        const newActiveContainer = [...activeContainer];
+        const newOverContainer = [...overContainer];
+
+        newActiveContainer.splice(activeIndex, 1);
+        newOverContainer.splice(overIndex, 0, active.id.toString());
+
+        if (activeContainer === sortables) {
+          setSortables(newActiveContainer);
+          setAnswerSortables(newOverContainer);
+        } else {
+          setSortables(newOverContainer);
+          setAnswerSortables(newActiveContainer);
+        }
+      }
+      console.log("New answers:", answerSortables);
+      console.log("New items:", sortables);
+    } else {
       return;
     }
   }
@@ -79,28 +129,24 @@ export default function GameContext({ game }: { game: Game }) {
         collisionDetection={closestCorners}
       >
         <SortableContext
-          items={sortables}
+          items={[...answerSortables, ...sortables]}
           strategy={horizontalListSortingStrategy}
+          id={"selectionRow"}
         >
-          <div
-            id="drop"
-            className="bg-red-400 h-auto flex gap-10 p-8 rounded content-center w-fit"
-          >
-            {sortables?.map((id, index) => (
-              <SortableItem
-                key={id}
-                id={id}
-                img={`/${filename}/${id}`}
-                title={titles?.[index] ?? ""}
-              />
-            ))}
-          </div>
+          <SortableContainer
+            id={1}
+            filename={filename ?? ""}
+            titles={titles}
+            sortables={answerSortables}
+          />
+
+          <SortableContainer
+            id={2}
+            filename={filename ?? ""}
+            titles={titles}
+            sortables={sortables}
+          />
         </SortableContext>
-        {/* <DragOverlay>
-          {activeSelection ? (
-            <SortableItem id={activeSelection} img={activeSelection} />
-          ) : null}
-        </DragOverlay> */}
       </DndContext>
       <dialog id="my_modal_1" className="modal" open={isModalVisible}>
         <div className="modal-box">

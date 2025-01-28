@@ -3,15 +3,12 @@ import React from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import Image from "next/image";
+import { SortableItem } from "../Game";
 
 export default function SortableItem({
-  id,
-  img,
-  title,
+  sortableItem,
 }: {
-  id: string;
-  img: string;
-  title: string;
+  sortableItem: SortableItem;
 }) {
   const {
     attributes,
