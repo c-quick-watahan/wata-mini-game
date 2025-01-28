@@ -1,5 +1,5 @@
 "use client";
-import React, { useMemo, useState } from "react";
+
 import { Column, Id, Task } from "./types";
 import { SortableContext, useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
@@ -28,10 +28,6 @@ const Board = (props: Props) => {
     transition: transition || undefined,
     transform: CSS.Transform.toString(transform),
   };
-
-  const taskIds = useMemo(() => {
-    return tasks.map((task) => task.id);
-  }, [tasks]);
 
   return (
     <div

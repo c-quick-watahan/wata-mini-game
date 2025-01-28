@@ -1,5 +1,5 @@
 "use client";
-import React, { useMemo, useState } from "react";
+
 import { SortableContext, useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import SortableCard from "./SortableCard";
@@ -30,16 +30,14 @@ const RowContainer = (props: Props) => {
     width: "100%",
   };
 
-  const rowIds = useMemo(() => {
-    return sortables.map((sortable) => sortable.id);
-  }, [sortables]);
-
   return (
     <div
       id="Row Container"
       className="inline-block border min-h-52"
       ref={setNodeRef}
       style={style}
+      suppressHydrationWarning={true}
+      aria-describedby=""
     >
       <div className="Row Container Context" {...attributes} {...listeners}>
         <SortableContext items={sortables}>

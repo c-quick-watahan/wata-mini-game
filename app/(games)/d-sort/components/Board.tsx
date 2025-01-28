@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useId } from "react";
 import {
   DndContext,
   DragEndEvent,
@@ -14,14 +14,11 @@ import SortableCard from "./SortableCard";
 import { sampleGame } from "../Game";
 
 export default function Board() {
-  // Rows
   const rows = [
     { id: "top", title: "Row 1" },
     { id: "bottom", title: "Row 2" },
   ];
   const [activeRow, setActiveRow] = useState<Row | null>(null);
-  // Sortables
-
   const [sortables, setSortables] = useState<Sortable[]>(
     sampleGame.sortableItems || []
   );
@@ -41,7 +38,6 @@ export default function Board() {
           return;
         }
       }
-      console.log("got em all right!");
       setModalVisibility(true);
     }
   }, [topRowAnswers]);
@@ -117,10 +113,12 @@ export default function Board() {
       });
     }
   }
+  const id = useId();
 
   return (
     <>
       <DndContext
+        id={id}
         onDragStart={onDragStart}
         onDragEnd={onDragEnd}
         onDragOver={onDragOver}
