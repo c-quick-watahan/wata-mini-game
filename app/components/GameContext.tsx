@@ -12,7 +12,6 @@ import {
   arrayMove,
   horizontalListSortingStrategy,
   SortableContext,
-  verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { useEffect, useState } from "react";
 import SortableItem from "./SortableItem";

@@ -1,10 +1,10 @@
+"use client";
 import React from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Sortable } from "../types";
 import Image from "next/image";
 import { Game } from "../Game";
-import gameCard from "@/app/ui/gameCard";
 
 interface Props {
   sortable: Sortable;
@@ -31,6 +31,8 @@ export default function SortableCard({ sortable, game }: Props) {
         className="min-h-full w-auto text-white text-center"
         {...attributes}
         {...listeners}
+        suppressHydrationWarning={true}
+        aria-describedby=""
       >
         {sortable.title}
         <Image
