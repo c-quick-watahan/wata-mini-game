@@ -28,7 +28,6 @@ export default function Board() {
   const [topRowAnswers, setTopRowAnswers] = useState<Sortable[]>([]);
 
   useEffect(() => {
-    console.log("Top Row: ", topRowAnswers);
     if (topRowAnswers.length > 0) {
       for (let i = 0; i < topRowAnswers.length; i++) {
         if (
@@ -40,6 +39,18 @@ export default function Board() {
       }
       setModalVisibility(true);
     }
+  }, [topRowAnswers]);
+  useEffect(() => {
+    const topRowIds = topRowAnswers.map((sortable) => sortable.id);
+    setTimeout(() =>
+      setSortables((prevSortables) =>
+        prevSortables.map((sortable) =>
+          topRowIds.includes(sortable.id)
+            ? sortable
+            : { ...sortable, rowId: "bottom" }
+        )
+      )
+    );
   }, [topRowAnswers]);
 
   function flipModal() {
@@ -74,45 +85,46 @@ export default function Board() {
       );
     }
   }
-  useEffect(() => {
-    const topRowIds = topRowAnswers.map((sortable) => sortable.id);
-    setSortables((prevSortables) =>
-      prevSortables.map((sortable) =>
-        topRowIds.includes(sortable.id)
-          ? sortable
-          : { ...sortable, rowId: "bottom" }
-      )
-    );
-  }, [topRowAnswers]);
 
   function onDragOver(event: DragOverEvent) {
     const { active, over } = event;
     if (!over) return;
+
     const isActiveASortable = active?.data?.current?.type === "Sortable";
     const isOverASortable = over?.data?.current?.type === "Sortable";
     const isOverARow = over?.data?.current?.type === "Row";
     const activeIndex = sortables.findIndex((t) => t.id === active.id);
     const overIndex = sortables.findIndex((t) => t.id === over.id);
+
     if (isActiveASortable && isOverASortable) {
       if (activeIndex !== overIndex) {
-        setSortables((sortables) => {
-          if (sortables[activeIndex].rowId !== sortables[overIndex].rowId) {
-            sortables[activeIndex].rowId = sortables[overIndex].rowId;
-          }
-          return arrayMove(sortables, activeIndex, overIndex);
-        });
+        setTimeout(
+          () =>
+            setSortables((currSortables) => {
+              const prev = [...currSortables];
+              if (prev[activeIndex].rowId !== prev[overIndex].rowId) {
+                prev[activeIndex].rowId = prev[overIndex].rowId;
+              }
+              return arrayMove(prev, activeIndex, overIndex);
+            }),
+          0
+        );
       }
     } else if (isActiveASortable && isOverARow) {
-      setSortables((sortables) => {
-        const activeIndex = sortables.findIndex((t) => t.id === active.id);
-        if (sortables[activeIndex].rowId !== over.id) {
-          sortables[activeIndex].rowId = over.id;
-          return arrayMove(sortables, activeIndex, activeIndex);
-        }
-        return sortables;
-      });
-    }
+      setTimeout(() => {
+        setSortables((currSortables) => {
+          const prev = [...currSortables];
+          const activeIndex = prev.findIndex((t) => t.id === active.id);
+          if (prev[activeIndex].rowId !== over.id) {
+            prev[activeIndex].rowId = over.id;
+            return arrayMove(prev, activeIndex, activeIndex);
+          }
+          return prev;
+        });
+      }, 0);
+    } else return;
   }
+
   const id = useId();
 
   return (

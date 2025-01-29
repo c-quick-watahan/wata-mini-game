@@ -1,7 +1,7 @@
+import { useId } from "react";
 import { Sortable } from "./types";
 
 export type Id = string | number;
-
 export interface Game {
   gameId: Id;
   name: string;
@@ -10,7 +10,7 @@ export interface Game {
   sortableItems?: Sortable[];
 }
 export const sampleGame: Game = {
-  gameId: 1,
+  gameId: "Sashimi Game",
   name: "Sashimi Game",
   filename: "sushi",
   answerArray: [0, 1, 2, 3],
