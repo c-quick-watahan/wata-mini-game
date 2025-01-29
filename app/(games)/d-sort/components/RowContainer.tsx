@@ -33,7 +33,7 @@ const RowContainer = (props: Props) => {
   return (
     <div
       id="Row Container"
-      className="inline-block border min-h-52"
+      className="inline-block border flex justify-center min-h-52"
       ref={setNodeRef}
       style={style}
       suppressHydrationWarning={true}

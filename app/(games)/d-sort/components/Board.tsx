@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useCallback, useEffect, useId } from "react";
+import confetti from "canvas-confetti";
 import {
   DndContext,
   DragEndEvent,
@@ -27,6 +28,27 @@ export default function Board() {
 
   const [topRowAnswers, setTopRowAnswers] = useState<Sortable[]>([]);
 
+  var count = 200;
+  var defaults = {
+    origin: { y: 0.7 },
+  };
+
+  interface FireOptions {
+    spread?: number;
+    startVelocity?: number;
+    decay?: number;
+    scalar?: number;
+    particleCount?: number;
+  }
+
+  function fire(particleRatio: number, opts: FireOptions) {
+    confetti({
+      ...defaults,
+      ...opts,
+      particleCount: Math.floor(count * particleRatio),
+    });
+  }
+
   useEffect(() => {
     if (topRowAnswers.length > 0) {
       for (let i = 0; i < topRowAnswers.length; i++) {
@@ -37,7 +59,28 @@ export default function Board() {
           return;
         }
       }
-      setModalVisibility(true);
+      fire(0.25, {
+        spread: 26,
+        startVelocity: 55,
+      });
+      fire(0.2, {
+        spread: 60,
+      });
+      fire(0.35, {
+        spread: 100,
+        decay: 0.91,
+        scalar: 0.8,
+      });
+      fire(0.1, {
+        spread: 120,
+        startVelocity: 25,
+        decay: 0.92,
+        scalar: 1.2,
+      });
+      fire(0.1, {
+        spread: 120,
+        startVelocity: 45,
+      });
     }
   }, [topRowAnswers]);
   useEffect(() => {
