@@ -1,5 +1,5 @@
-import GameWrapper from "./ui/gameWrapper";
+import CareerWrapper from "./ui/CareerWrapper";
 
 export default function Home() {
-  return <GameWrapper />;
+  return <CareerWrapper />;
 }

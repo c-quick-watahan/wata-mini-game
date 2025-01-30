@@ -1,40 +1,192 @@
+import { Sortable } from "./types";
+
+export type Id = string | number;
 export interface Game {
-  id: string;
+  gameId: Id;
   name: string;
-  image: string;
-  initial_array: string[];
-  final_array: string[];
-  gameImages?: GameImages;
-}
-export interface ImageFile {
-  title?: string[];
-  imgFiles?: string[];
-}
-export interface GameImages {
-  id: string;
   filename: string;
-  title?: string[];
-  imgFiles?: string[];
+  answerArray?: Id[];
+  sortableItems?: Sortable[];
 }
-export const sampleGames: Game[] = [
+
+export interface Career {
+  careerId: Id;
+  careerName?: string;
+  games?: Game[];
+}
+
+export const careers: Career[] = [
   {
-    id: "1",
-    name: "Sashimi Game",
-    image: "puzzle.png",
-    initial_array: ["piece1", "piece2", "piece3"],
-    final_array: ["sushi_0.png", "sushi_1.png", "sushi_2.png", "sushi_3.png"],
-    gameImages: {
-      id: "string",
-      filename: "sushi",
-      title: ["ウロコを書く", "3枚におろす", "皮を引く", "スライス"],
-      imgFiles: ["sushi_0.png", "sushi_1.png", "sushi_2.png", "sushi_3.png"],
-    },
+    careerId: "sashimi-chef",
+    careerName: "Sashimi Chef",
+    games: [
+      {
+        gameId: "sashimi-game",
+        name: "Sashimi Game",
+        filename: "sushi",
+        answerArray: [0, 1, 2, 3],
+        sortableItems: [
+          {
+            id: 0,
+            rowId: "bottom",
+            title: "ウロコを書く",
+            content: "sushi_0.png",
+          },
+          {
+            id: 1,
+            rowId: "bottom",
+            title: "3枚におろす",
+            content: "sushi_1.png",
+          },
+          {
+            id: 2,
+            rowId: "bottom",
+            title: "皮を引く",
+            content: "sushi_2.png",
+          },
+          {
+            id: 3,
+            rowId: "bottom",
+            title: "スライス",
+            content: "sushi_3.png",
+          },
+        ],
+      },
+      {
+        gameId: "Fish Peeling Game",
+        name: "Pealing Game",
+        filename: "sushi",
+        answerArray: [0, 1, 2, 3],
+        sortableItems: [
+          {
+            id: 0,
+            rowId: "bottom",
+            title: "ウロコを書く",
+            content: "sushi_0.png",
+          },
+          {
+            id: 1,
+            rowId: "bottom",
+            title: "3枚におろす",
+            content: "sushi_1.png",
+          },
+          {
+            id: 2,
+            rowId: "bottom",
+            title: "皮を引く",
+            content: "sushi_2.png",
+          },
+          {
+            id: 3,
+            rowId: "bottom",
+            title: "スライス",
+            content: "sushi_3.png",
+          },
+        ],
+      },
+    ],
   },
   {
-    id: "2",
-    name: "Memory Game",
-    image: "memory.png",
-    initial_array: ["card1", "card2", "card3"],
-    final_array: ["card1", "card2", "card3"],
+    careerId: "butcher-dude",
+    careerName: "Something else",
+    games: [
+      {
+        gameId: "Sashimi Game",
+        name: "Sashimi Game",
+        filename: "sushi",
+        answerArray: [0, 1, 2, 3],
+        sortableItems: [
+          {
+            id: 0,
+            rowId: "bottom",
+            title: "ウロコを書く",
+            content: "sushi_0.png",
+          },
+          {
+            id: 1,
+            rowId: "bottom",
+            title: "3枚におろす",
+            content: "sushi_1.png",
+          },
+          {
+            id: 2,
+            rowId: "bottom",
+            title: "皮を引く",
+            content: "sushi_2.png",
+          },
+          {
+            id: 3,
+            rowId: "bottom",
+            title: "スライス",
+            content: "sushi_3.png",
+          },
+        ],
+      },
+      {
+        gameId: "Sashimi Game",
+        name: "Sashimi Game",
+        filename: "sushi",
+        answerArray: [0, 1, 2, 3],
+        sortableItems: [
+          {
+            id: 0,
+            rowId: "bottom",
+            title: "ウロコを書く",
+            content: "sushi_0.png",
+          },
+          {
+            id: 1,
+            rowId: "bottom",
+            title: "3枚におろす",
+            content: "sushi_1.png",
+          },
+          {
+            id: 2,
+            rowId: "bottom",
+            title: "皮を引く",
+            content: "sushi_2.png",
+          },
+          {
+            id: 3,
+            rowId: "bottom",
+            title: "スライス",
+            content: "sushi_3.png",
+          },
+        ],
+      },
+    ],
   },
 ];
+
+export const sampleGame: Game = {
+  gameId: "Sashimi Game",
+  name: "Sashimi Game",
+  filename: "sushi",
+  answerArray: [0, 1, 2, 3],
+  sortableItems: [
+    {
+      id: 0,
+      rowId: "bottom",
+      title: "ウロコを書く",
+      content: "sushi_0.png",
+    },
+    {
+      id: 1,
+      rowId: "bottom",
+      title: "3枚におろす",
+      content: "sushi_1.png",
+    },
+    {
+      id: 2,
+      rowId: "bottom",
+      title: "皮を引く",
+      content: "sushi_2.png",
+    },
+    {
+      id: 3,
+      rowId: "bottom",
+      title: "スライス",
+      content: "sushi_3.png",
+    },
+  ],
+};
