@@ -9,7 +9,6 @@ import {
   DragStartEvent,
 } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
-// import { Row, Sortable } from "../types";
 import RowContainer from "./RowContainer";
 import SortableCard from "./SortableCard";
 import { Game } from "../interfaces/Game";

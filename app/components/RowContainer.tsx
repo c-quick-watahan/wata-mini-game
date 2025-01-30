@@ -3,8 +3,8 @@
 import { SortableContext, useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import SortableCard from "./SortableCard";
-import { Id, Row, Sortable } from "../types";
-import { Game } from "../Game";
+import { Row, Sortable } from "../interfaces/types";
+import { Game } from "../interfaces/Game";
 
 interface Props {
   row: Row;
