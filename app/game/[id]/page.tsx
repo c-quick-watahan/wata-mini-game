@@ -1,7 +1,7 @@
 import { Game, sampleGames } from "@/app/interfaces/Game";
 import React from "react";
 import Image from "next/image";
-import GameContext from "@/app/components/GameContext";
+import GameContext from "@/app/old_components/GameContext";
 
 export default async function Page({
   params,

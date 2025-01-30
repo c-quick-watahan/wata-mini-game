@@ -10,18 +10,18 @@ export interface Game {
 }
 
 export interface Career {
-  careerGuid: Id;
+  careerId: Id;
   careerName?: string;
   games?: Game[];
 }
 
 export const careers: Career[] = [
   {
-    careerGuid: "6f90f733-3b7b-6854-9965-db2e24ca143a",
+    careerId: "sashimi-chef",
     careerName: "Sashimi Chef",
     games: [
       {
-        gameId: "Sashimi Game",
+        gameId: "sashimi-game",
         name: "Sashimi Game",
         filename: "sushi",
         answerArray: [0, 1, 2, 3],
@@ -87,7 +87,7 @@ export const careers: Career[] = [
     ],
   },
   {
-    careerGuid: "a0290b8a-c9a1-76cd-586e-fe41ec4394f8",
+    careerId: "butcher-dude",
     careerName: "Something else",
     games: [
       {

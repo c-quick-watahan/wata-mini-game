@@ -8,7 +8,7 @@ export default function CareerWrapper() {
       className="font-[family-name:var(--font-geist-sans)] flex justify-center content-center gap-4 flex-wrap"
     >
       {careers.map((career) => (
-        <CareerCard key={career.careerGuid} careerGuid={career.careerGuid} />
+        <CareerCard key={career.careerId} careerId={career.careerId} />
       ))}
     </div>
   );

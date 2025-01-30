@@ -2,10 +2,10 @@ import { Game, Id } from "../interfaces/Game";
 import GameCard from "./GameCard";
 
 export default function GameWrapper({
-  careerGuid,
+  careerId,
   games,
 }: {
-  careerGuid: Id;
+  careerId: Id;
   games: Game[];
 }) {
   return (
@@ -16,8 +16,9 @@ export default function GameWrapper({
       {games.map((game) => (
         <GameCard
           key={game.gameId}
-          careerGuid={careerGuid}
+          careerId={careerId}
           gameId={game.gameId}
+          game={game}
         />
       ))}
     </div>
