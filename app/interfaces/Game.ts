@@ -1,13 +1,4 @@
-import { title } from "process";
 import { Sortable } from "./types";
-import { Guid } from "guid-typescript";
-
-export class Example {
-  public id: Guid;
-  constructor() {
-    this.id = Guid.create(); // ==> b77d409a-10cd-4a47-8e94-b0cd0ab50aa1
-  }
-}
 
 export type Id = string | number;
 export interface Game {
@@ -17,17 +8,16 @@ export interface Game {
   answerArray?: Id[];
   sortableItems?: Sortable[];
 }
-// export const games: Game[] = [];
 
 export interface Career {
-  careerGuid: Guid;
+  careerGuid: Id;
   careerName?: string;
-  games: Game[];
+  games?: Game[];
 }
 
 export const careers: Career[] = [
   {
-    careerGuid: Guid.create(),
+    careerGuid: "6f90f733-3b7b-6854-9965-db2e24ca143a",
     careerName: "Sashimi Chef",
     games: [
       {
@@ -63,8 +53,8 @@ export const careers: Career[] = [
         ],
       },
       {
-        gameId: "Sashimi Game",
-        name: "Sashimi Game",
+        gameId: "Fish Peeling Game",
+        name: "Pealing Game",
         filename: "sushi",
         answerArray: [0, 1, 2, 3],
         sortableItems: [
@@ -97,7 +87,7 @@ export const careers: Career[] = [
     ],
   },
   {
-    careerGuid: Guid.create(),
+    careerGuid: "a0290b8a-c9a1-76cd-586e-fe41ec4394f8",
     careerName: "Something else",
     games: [
       {
