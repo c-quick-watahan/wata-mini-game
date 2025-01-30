@@ -35,9 +35,7 @@ export default function GameContext({ game }: { game: Game }) {
   // });
 
   useEffect(() => {
-    console.log(sortables);
     if (JSON.stringify(sortables) === JSON.stringify(final_array)) {
-      console.log("equal");
       setModalVisibility(true);
     } else {
       return;
@@ -51,7 +49,6 @@ export default function GameContext({ game }: { game: Game }) {
   }
 
   function handleDragStart(event: DragStartEvent) {
-    console.log("event", event?.active?.id.toString());
     setActiveSelection(event?.active?.id.toString());
     return;
   }
