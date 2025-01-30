@@ -1,5 +1,4 @@
 import { Game, Id } from "../interfaces/Game";
-import GameCard from "./GameCard";
 
 export default function GameWrapper({
   careerId,
