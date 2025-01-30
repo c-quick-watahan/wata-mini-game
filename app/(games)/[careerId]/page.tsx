@@ -1,7 +1,7 @@
 import { careers } from "@/app/interfaces/Game";
 import React from "react";
 import { Id } from "../d-sort/types";
-import GameWrapper from "@/app/ui/GameWrapper";
+import GameWrapper from "../../ui/GameWrapper";
 
 export default async function Page({
   params,
