@@ -33,17 +33,23 @@ const RowContainer = (props: Props) => {
   return (
     <div
       id="Row Container"
-      className="inline-block border flex justify-center min-h-52"
+      className="inline-block flex justify-center min-h-52 bg-[#0066A5] rounded-md"
       ref={setNodeRef}
       style={style}
       suppressHydrationWarning={true}
       aria-describedby=""
     >
-      <div className="Row Container Context" {...attributes} {...listeners}>
+      <div
+        id="Row Container Context"
+        className="flex items-center gap-[2rem]"
+        {...attributes}
+        {...listeners}
+      >
         <SortableContext items={sortables}>
           {sortables.map((sortable) => (
             <div
-              className="p-2 h-auto rounded-md text-black inline-block w-fit"
+              id="Sortable Card"
+              className="h-auto rounded-md text-black inline-block w-fit"
               key={sortable.id}
             >
               <SortableCard key={sortable.id} sortable={sortable} game={game} />
