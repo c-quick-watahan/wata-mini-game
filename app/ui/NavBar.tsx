@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function NavBar() {
   return (
     <>
@@ -29,23 +31,34 @@ export default function NavBar() {
               className="menu menu-sm dropdown-content bg-white shadow-xl rounded-box z-[1] mt-3 w-52 p-2 text-[#0066A5]"
             >
               <li>
-                <a>Home</a>
+                <button className="btn btn-ghost text-[#0066A5] text-md">
+                  <Link href={"/"}>Home</Link>
+                </button>
               </li>
               <li>
-                <a>About</a>
+                <button className="btn btn-ghost text-[#0066A5] text-md">
+                  <Link href={"/"}>About</Link>
+                </button>
               </li>
             </ul>
           </div>
-          <a className="btn btn-ghost text-[#0066A5] text-xl">Wata Mini Game</a>
+          <button className="btn btn-ghost text-[#0066A5] text-3xl">
+            <Link href={"/"}>Wata Mini Game</Link>
+          </button>
+          {/* <a className="btn btn-ghost text-[#0066A5] text-xl">Wata Mini Game</a> */}
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 text-[#0066A5]">
             <li>
-              <a>Home</a>
+              <button className="btn btn-ghost text-[#0066A5] text-md">
+                <Link href={"/"}>Home</Link>
+              </button>
             </li>
             <li></li>
             <li>
-              <a>About</a>
+              <button className="btn btn-ghost text-[#0066A5] text-md">
+                <Link href={"/"}>About</Link>
+              </button>
             </li>
           </ul>
         </div>
