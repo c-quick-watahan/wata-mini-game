@@ -13,6 +13,7 @@ import RowContainer from "./RowContainer";
 import SortableCard from "./SortableCard";
 import { Game } from "../interfaces/Game";
 import { Row, Sortable } from "../interfaces/types";
+import WataPiModal from "../ui/WataPiModal";
 
 export default function Board({ game }: { game: Game }) {
   const rows = [
@@ -25,7 +26,6 @@ export default function Board({ game }: { game: Game }) {
   );
   const [activeSortable, setActiveSortable] = useState<Sortable | null>(null);
   const [isModalVisible, setModalVisibility] = useState(false);
-
   const [topRowAnswers, setTopRowAnswers] = useState<Sortable[]>([]);
 
   var count = 200;
@@ -48,6 +48,10 @@ export default function Board({ game }: { game: Game }) {
       particleCount: Math.floor(count * particleRatio),
     });
   }
+  useEffect(() => {
+    const randomizedSortables = [...sortables].sort(() => Math.random() - 0.5);
+    setSortables(randomizedSortables);
+  }, []);
 
   useEffect(() => {
     if (topRowAnswers.length > 0) {
@@ -81,6 +85,7 @@ export default function Board({ game }: { game: Game }) {
         spread: 120,
         startVelocity: 45,
       });
+      setModalVisibility(true);
     }
   }, [topRowAnswers]);
   useEffect(() => {
@@ -211,16 +216,7 @@ export default function Board({ game }: { game: Game }) {
           )}
         </DragOverlay>
       </DndContext>
-      <dialog id="my_modal_1" className="modal" open={isModalVisible}>
-        <div className="modal-box">
-          <h1 className="font-bold text-lg">Good job!</h1>
-          <div className="modal-action">
-            <button className="btn" onClick={flipModal}>
-              Close
-            </button>
-          </div>
-        </div>
-      </dialog>
+      {isModalVisible && <WataPiModal flipModal={flipModal} />}
     </>
   );
 }
