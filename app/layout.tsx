@@ -14,9 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="flex h-screen flex-col md:overflow-hidden text-[#0066A5]">
+      <body className="flex h-screen flex-col md:overflow-hidden ">
         <NavBar />
-        <div className="flex-grow p-6 md:overflow-y-auto md:p-12 text-[#0066A5] bg-white">
+        <div className="flex-grow p-6 md:overflow-y-auto md:p-12  bg-white">
           {children}
         </div>
       </body>
