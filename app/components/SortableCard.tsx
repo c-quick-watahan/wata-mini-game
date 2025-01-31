@@ -35,7 +35,7 @@ export default function SortableCard({ sortable, game }: Props) {
         aria-describedby=""
       >
         <div
-          className="rounded-md"
+          className="rounded-md touch-none"
           style={{
             position: "relative",
             display: "inline-block",
