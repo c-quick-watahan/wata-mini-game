@@ -7,6 +7,10 @@ import {
   DragOverEvent,
   DragOverlay,
   DragStartEvent,
+  PointerSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
 } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
 import RowContainer from "./RowContainer";
@@ -172,7 +176,7 @@ export default function Board({ game }: { game: Game }) {
       }, 0);
     } else return;
   }
-
+  const sensors = useSensors(useSensor(PointerSensor), useSensor(TouchSensor));
   const id = useId();
 
   return (
@@ -182,6 +186,8 @@ export default function Board({ game }: { game: Game }) {
         onDragStart={onDragStart}
         onDragEnd={onDragEnd}
         onDragOver={onDragOver}
+        autoScroll={{ enabled: true }}
+        sensors={sensors}
       >
         <div id="Board" className="h-auto rounded min-w-full">
           {rows.map((row) => (
