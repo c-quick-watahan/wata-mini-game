@@ -1,4 +1,3 @@
-import { useId } from "react";
 import { Sortable } from "./types";
 
 export type Id = string | number;

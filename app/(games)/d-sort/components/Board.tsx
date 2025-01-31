@@ -183,7 +183,7 @@ export default function Board() {
             <div
               id="Row Container DIV"
               key={row.id}
-              className="h-auto gap-2 p-8 rounded"
+              className="h-auto gap-2 p-8 rounded "
             >
               <RowContainer
                 key={row.id}

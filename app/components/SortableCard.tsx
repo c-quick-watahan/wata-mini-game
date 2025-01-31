@@ -28,19 +28,33 @@ export default function SortableCard({ sortable, game }: Props) {
   return (
     <div id="Row div" ref={setNodeRef} style={style}>
       <div
-        className="min-h-full w-auto text-white text-center"
+        className="min-h-full w-auto text-black text-center"
         {...attributes}
         {...listeners}
         suppressHydrationWarning={true}
         aria-describedby=""
       >
-        {sortable.title}
-        <Image
-          src={`/${game.filename}/${sortable.content}`}
-          width={227}
-          height={80}
-          alt={`${sortable.title}`}
-        />
+        <div
+          className="rounded-md"
+          style={{
+            position: "relative",
+            display: "inline-block",
+            border: ".25rem solid #0066A5",
+            background: "#0066A5",
+            width: "200px", // Set a reasonable width for the container
+            height: "auto", // Let the height adjust based on the image's aspect ratio
+          }}
+        >
+          <Image
+            src={`/${game.filename}/${sortable.content}`}
+            alt={`${sortable.title}`}
+            layout="responsive" // Make the image responsive
+            width={200} // Set the intrinsic width of the image (for aspect ratio)
+            height={150} // Set the intrinsic height of the image (for aspect ratio)
+            objectFit="cover" // Ensure the image fills the container
+          />
+          <div className="text-white text-center">{sortable.title}</div>
+        </div>
       </div>
     </div>
   );

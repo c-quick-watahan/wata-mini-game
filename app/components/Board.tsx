@@ -183,7 +183,7 @@ export default function Board({ game }: { game: Game }) {
         onDragEnd={onDragEnd}
         onDragOver={onDragOver}
       >
-        <div id="Board" className="h-auto gap-10 p-8 rounded">
+        <div id="Board" className="h-auto rounded min-w-full">
           {rows.map((row) => (
             <div
               id="Row Container DIV"
