@@ -7,7 +7,7 @@ export default function NavBar() {
             <div
               tabIndex={0}
               role="button"
-              className="btn btn-ghost bg-white lg:hidden text-[#0066A5]"
+              className="btn btn-ghost bg-white lg:hidden "
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -26,7 +26,7 @@ export default function NavBar() {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-white shadow-xl rounded-box z-[1] mt-3 w-52 p-2 text-[#0066A5]"
+              className="menu menu-sm dropdown-content bg-white shadow-xl rounded-box z-[1] mt-3 w-52 p-2 "
             >
               <li>
                 <a>Home</a>
@@ -36,10 +36,10 @@ export default function NavBar() {
               </li>
             </ul>
           </div>
-          <a className="btn btn-ghost text-[#0066A5] text-xl">Wata Mini Game</a>
+          <a className="btn btn-ghost  text-xl">Wata Mini Game</a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 text-[#0066A5]">
+          <ul className="menu menu-horizontal px-1 ">
             <li>
               <a>Home</a>
             </li>
@@ -50,7 +50,7 @@ export default function NavBar() {
           </ul>
         </div>
         <div className="navbar-end">
-          <a className="btn bg-white btn-ghost text-[#0066A5]">Idk...</a>
+          <a className="btn bg-white btn-ghost">Idk...</a>
         </div>
       </div>
     </>
