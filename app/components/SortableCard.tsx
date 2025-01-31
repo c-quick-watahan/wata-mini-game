@@ -39,8 +39,8 @@ export default function SortableCard({ sortable, game }: Props) {
           style={{
             position: "relative",
             display: "inline-block",
-            border: ".25rem solid #FF6F61",
-            background: "#FF6F61",
+            border: ".25rem solid #0066A5",
+            background: "#0066A5",
             width: "200px", // Set a reasonable width for the container
             height: "auto", // Let the height adjust based on the image's aspect ratio
           }}
@@ -53,7 +53,7 @@ export default function SortableCard({ sortable, game }: Props) {
             height={150} // Set the intrinsic height of the image (for aspect ratio)
             objectFit="cover" // Ensure the image fills the container
           />
-          {sortable.title}
+          <div className="text-white text-center">{sortable.title}</div>
         </div>
       </div>
     </div>

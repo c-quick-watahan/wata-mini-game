@@ -31,14 +31,14 @@ export default function NavBar() {
               className="menu menu-sm dropdown-content bg-white shadow-xl rounded-box z-[1] mt-3 w-52 p-2 text-[#0066A5]"
             >
               <li>
-                <button className="btn btn-ghost text-[#0066A5] text-md">
-                  <Link href={"/"}>Home</Link>
-                </button>
+                <Link href={"/"}>
+                  <button className="text-[#0066A5] text-md">Home</button>
+                </Link>
               </li>
               <li>
-                <button className="btn btn-ghost text-[#0066A5] text-md">
-                  <Link href={"/"}>About</Link>
-                </button>
+                <Link href={"/"}>
+                  <button className=" text-[#0066A5] text-md">About</button>
+                </Link>
               </li>
             </ul>
           </div>
@@ -50,15 +50,19 @@ export default function NavBar() {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 text-[#0066A5]">
             <li>
-              <button className="btn btn-ghost text-[#0066A5] text-md">
-                <Link href={"/"}>Home</Link>
-              </button>
+              <Link href={"/"}>
+                <button className="btn btn-ghost text-[#0066A5] text-md">
+                  Home
+                </button>
+              </Link>
             </li>
             <li></li>
             <li>
-              <button className="btn btn-ghost text-[#0066A5] text-md">
-                <Link href={"/"}>About</Link>
-              </button>
+              <Link href={"/"}>
+                <button className="btn btn-ghost text-[#0066A5] text-md">
+                  About
+                </button>
+              </Link>
             </li>
           </ul>
         </div>

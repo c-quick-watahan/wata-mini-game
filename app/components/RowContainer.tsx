@@ -33,7 +33,7 @@ const RowContainer = (props: Props) => {
   return (
     <div
       id="Row Container"
-      className="inline-block flex justify-center min-h-52 bg-[#0066A5] rounded-md"
+      className="inline-block flex justify-center min-h-52 bg-cyan-200 rounded-md"
       ref={setNodeRef}
       style={style}
       suppressHydrationWarning={true}
@@ -49,7 +49,7 @@ const RowContainer = (props: Props) => {
           {sortables.map((sortable) => (
             <div
               id="Sortable Card"
-              className="h-auto rounded-md text-black inline-block w-fit"
+              className="h-auto rounded-md text-white inline-block w-fit"
               key={sortable.id}
             >
               <SortableCard key={sortable.id} sortable={sortable} game={game} />

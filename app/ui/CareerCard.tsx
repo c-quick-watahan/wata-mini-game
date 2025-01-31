@@ -25,9 +25,9 @@ export default function CareerCard({ careerId }: { careerId: Id }) {
         <h2 className="card-title">{career?.careerName}</h2>
       </div>
       <div className="pb-2">
-        <button className="btn btn-primary p-">
-          <Link href={`/${careerId}`}>Play</Link>
-        </button>
+        <Link href={`/${careerId}`}>
+          <button className="btn btn-primary p-">Play</button>
+        </Link>
       </div>
     </div>
   );

@@ -36,9 +36,9 @@ export default function GameCard({
         <div className="card-actions"></div>
       </div>
       <div className="pb-2">
-        <button className="btn btn-primary p-">
-          <Link href={`/${careerId}/${gameId}`}>Play Now</Link>
-        </button>
+        <Link href={`/${careerId}/${gameId}`}>
+          <button className="btn btn-primary p-">Play Now</button>
+        </Link>
       </div>
     </div>
   );
