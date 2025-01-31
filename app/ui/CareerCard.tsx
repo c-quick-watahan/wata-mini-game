@@ -23,7 +23,6 @@ export default function CareerCard({ careerId }: { careerId: Id }) {
     >
       <div className="card-body pt-8 pl-8 pr-8 pb-4 text-center">
         <h2 className="card-title">{career?.careerName}</h2>
-        {/* <div className="card-actions"></div> */}
       </div>
       <div className="pb-2">
         <button className="btn btn-primary p-">
