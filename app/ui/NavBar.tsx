@@ -9,7 +9,7 @@ export default function NavBar() {
             <div
               tabIndex={0}
               role="button"
-              className="btn btn-ghost bg-white lg:hidden text-[#0066A5]"
+              className="btn btn-ghost bg-white md:hidden text-[#0066A5]"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -51,7 +51,7 @@ export default function NavBar() {
           <ul className="menu menu-horizontal px-1 text-[#0066A5]">
             <li>
               <Link href={"/"}>
-                <button className="btn btn-ghost text-[#0066A5] text-md">
+                <button className="btn btn-ghost text-[#0066A5] text-lg">
                   Home
                 </button>
               </Link>
@@ -59,7 +59,7 @@ export default function NavBar() {
             <li></li>
             <li>
               <Link href={"/"}>
-                <button className="btn btn-ghost text-[#0066A5] text-md">
+                <button className="btn btn-ghost text-[#0066A5] text-lg">
                   About
                 </button>
               </Link>
@@ -67,7 +67,9 @@ export default function NavBar() {
           </ul>
         </div>
         <div className="navbar-end">
-          <a className="btn bg-white btn-ghost text-[#0066A5]">Idk...</a>
+          <a className="btn bg-white btn-ghost text-[#0066A5] text-lg">
+            Idk...
+          </a>
         </div>
       </div>
     </>
