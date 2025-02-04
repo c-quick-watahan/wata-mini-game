@@ -149,6 +149,8 @@ export default function Board({ game }: { game: Game }) {
       }, 0);
     } else return;
   }
+  const sensors = useSensors(useSensor(PointerSensor), useSensor(TouchSensor));
+  const id = useId();
 
   return (
     <>
