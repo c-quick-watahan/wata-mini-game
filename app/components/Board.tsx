@@ -1,19 +1,27 @@
 "use client";
 import React, { useState, useCallback, useEffect, useId } from "react";
-import confetti from "canvas-confetti";
+
+// Third-party components
 import {
   DndContext,
   DragEndEvent,
   DragOverEvent,
   DragOverlay,
   DragStartEvent,
-} from "@dnd-kit/core";
+  PointerSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core"; // https://dndkit.com/
 import { arrayMove } from "@dnd-kit/sortable";
+
+// Application components
 import RowContainer from "./RowContainer";
 import SortableCard from "./SortableCard";
+import WataPiModal from "../ui/WataPiModal";
+import { fireConfetti } from "./lib/fire";
 import { Game } from "../interfaces/Game";
 import { Row, Sortable } from "../interfaces/types";
-import WataPiModal from "../ui/WataPiModal";
 
 export default function Board({ game }: { game: Game }) {
   const rows = [
@@ -27,27 +35,9 @@ export default function Board({ game }: { game: Game }) {
   const [activeSortable, setActiveSortable] = useState<Sortable | null>(null);
   const [isModalVisible, setModalVisibility] = useState(false);
   const [topRowAnswers, setTopRowAnswers] = useState<Sortable[]>([]);
+  const sensors = useSensors(useSensor(PointerSensor), useSensor(TouchSensor));
+  const id = useId();
 
-  var count = 200;
-  var defaults = {
-    origin: { y: 0.7 },
-  };
-
-  interface FireOptions {
-    spread?: number;
-    startVelocity?: number;
-    decay?: number;
-    scalar?: number;
-    particleCount?: number;
-  }
-
-  function fire(particleRatio: number, opts: FireOptions) {
-    confetti({
-      ...defaults,
-      ...opts,
-      particleCount: Math.floor(count * particleRatio),
-    });
-  }
   useEffect(() => {
     const randomizedSortables = [...sortables].sort(() => Math.random() - 0.5);
     setSortables(randomizedSortables);
@@ -63,31 +53,13 @@ export default function Board({ game }: { game: Game }) {
           return;
         }
       }
-      fire(0.25, {
-        spread: 26,
-        startVelocity: 55,
-      });
-      fire(0.2, {
-        spread: 60,
-      });
-      fire(0.35, {
-        spread: 100,
-        decay: 0.91,
-        scalar: 0.8,
-      });
-      fire(0.1, {
-        spread: 120,
-        startVelocity: 25,
-        decay: 0.92,
-        scalar: 1.2,
-      });
-      fire(0.1, {
-        spread: 120,
-        startVelocity: 45,
-      });
-      setModalVisibility(true);
+      setTimeout(() => {
+        fireConfetti();
+        setModalVisibility(true);
+      }, 500);
     }
   }, [topRowAnswers]);
+
   useEffect(() => {
     const topRowIds = topRowAnswers.map((sortable) => sortable.id);
     setTimeout(() =>
@@ -102,6 +74,11 @@ export default function Board({ game }: { game: Game }) {
   }, [topRowAnswers]);
 
   function flipModal() {
+    setModalVisibility(!isModalVisible);
+  }
+
+  function getCoupon() {
+    alert("Coupon code: 10% off your next purchase!");
     setModalVisibility(!isModalVisible);
   }
 
@@ -173,8 +150,6 @@ export default function Board({ game }: { game: Game }) {
     } else return;
   }
 
-  const id = useId();
-
   return (
     <>
       <DndContext
@@ -182,6 +157,8 @@ export default function Board({ game }: { game: Game }) {
         onDragStart={onDragStart}
         onDragEnd={onDragEnd}
         onDragOver={onDragOver}
+        autoScroll={{ enabled: true }}
+        sensors={sensors}
       >
         <div id="Board" className="h-auto rounded min-w-full">
           {rows.map((row) => (
@@ -216,7 +193,13 @@ export default function Board({ game }: { game: Game }) {
           )}
         </DragOverlay>
       </DndContext>
-      {isModalVisible && <WataPiModal flipModal={flipModal} />}
+      {isModalVisible && (
+        <WataPiModal
+          flipModal={flipModal}
+          getCoupon={getCoupon}
+          filename={game.filename}
+        />
+      )}
     </>
   );
 }
