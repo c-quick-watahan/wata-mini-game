@@ -160,7 +160,7 @@ export default function Board({ game }: { game: Game }) {
         onDragOver={onDragOver}
         autoScroll={{ enabled: true }}
         sensors={sensors}
-        // collisionDetection={pointerWithin}
+        collisionDetection={pointerWithin}
       >
         <div id="Board" className="h-auto rounded min-w-full">
           {rows.map((row) => (
