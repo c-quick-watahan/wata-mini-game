@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function NavBar() {
   return (
     <>
-      <div className="navbar bg-white shadow-xl z-50">
+      <div className="navbar bg-white shadow-xl z-40">
         <div className="navbar-start">
           <div className="dropdown">
             <div

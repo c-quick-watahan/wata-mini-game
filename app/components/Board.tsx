@@ -23,6 +23,7 @@ import WataPiModal from "../ui/WataPiModal";
 import { fireConfetti } from "./lib/fire";
 import { Game } from "../interfaces/Game";
 import { Row, Sortable } from "../interfaces/types";
+import QrModal from "../ui/QrModal";
 
 export default function Board({ game }: { game: Game }) {
   const rows = [
@@ -35,6 +36,7 @@ export default function Board({ game }: { game: Game }) {
   );
   const [activeSortable, setActiveSortable] = useState<Sortable | null>(null);
   const [isModalVisible, setModalVisibility] = useState(false);
+  const [isQrVisible, setQrVisible] = useState(false);
   const [topRowAnswers, setTopRowAnswers] = useState<Sortable[]>([]);
   const sensors = useSensors(useSensor(PointerSensor), useSensor(TouchSensor));
   const id = useId();
@@ -62,6 +64,7 @@ export default function Board({ game }: { game: Game }) {
   }, [topRowAnswers]);
 
   useEffect(() => {
+    // this is necessary to prevent errors
     const topRowIds = topRowAnswers.map((sortable) => sortable.id);
     setTimeout(() =>
       setSortables((prevSortables) =>
@@ -78,9 +81,12 @@ export default function Board({ game }: { game: Game }) {
     setModalVisibility(!isModalVisible);
   }
 
-  function getCoupon() {
-    alert("Coupon code: 10% off your next purchase!");
-    setModalVisibility(!isModalVisible);
+  function showQR() {
+    setQrVisible(!isQrVisible);
+  }
+
+  function flipQR() {
+    setQrVisible(!isQrVisible);
   }
 
   const onDragStart = useCallback((event: DragStartEvent) => {
@@ -198,10 +204,11 @@ export default function Board({ game }: { game: Game }) {
       {isModalVisible && (
         <WataPiModal
           flipModal={flipModal}
-          getCoupon={getCoupon}
+          showQR={showQR}
           filename={game.filename}
         />
       )}
+      {isQrVisible && <QrModal flipQR={flipQR} filename={game.filename} />}
     </>
   );
 }
