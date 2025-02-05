@@ -36,7 +36,7 @@ export default function SortableCard({ sortable, game }: Props) {
       <div
         ref={setNodeRef}
         style={style}
-        className="w-[200] h-[150] rounded-md border-red-600 border-dotted border-4"
+        className="w-[200px] h-[150px] rounded-md border-red-600 border-dotted border-4"
       ></div>
     );
   }
