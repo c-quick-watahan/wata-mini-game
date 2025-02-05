@@ -12,19 +12,34 @@ interface Props {
 }
 
 export default function SortableCard({ sortable, game }: Props) {
-  const { setNodeRef, attributes, listeners, transform, transition } =
-    useSortable({
-      id: sortable.id,
-      data: {
-        type: "Sortable",
-        sortable,
-      },
-    });
+  const {
+    setNodeRef,
+    attributes,
+    listeners,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({
+    id: sortable.id,
+    data: {
+      type: "Sortable",
+      sortable,
+    },
+  });
 
   const style = {
     transition: transition || undefined,
     transform: CSS.Transform.toString(transform),
   };
+  if (isDragging) {
+    return (
+      <div
+        ref={setNodeRef}
+        style={style}
+        className="w-[200] h-[150] rounded-md border-red-600 border-dotted border-4"
+      ></div>
+    );
+  }
   return (
     <div id="Row div" ref={setNodeRef} style={style}>
       <div
