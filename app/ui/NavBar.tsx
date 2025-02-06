@@ -68,7 +68,7 @@ export default function NavBar() {
         </div>
         <div className="navbar-end">
           <a className="btn bg-white btn-ghost text-[#0066A5] text-lg">
-            Idk...
+            Sign In
           </a>
         </div>
       </div>
