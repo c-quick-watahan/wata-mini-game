@@ -5,8 +5,10 @@ import { getFirestore } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import CareerWrapper from "./ui/CareerWrapper";
 import { useEffect, useState } from "react";
-import SignIn from "./components/lib/firebase/components/signin";
-import { firebaseConfig } from "./components/lib/firebase/config";
+import { firebaseConfig } from "@/lib/firebase/config";
+import SignIn from "@/lib/firebase/components/signin";
+// import SignIn from "./components/lib/firebase/components/signin";
+// import { firebaseConfig } from "./components/lib/firebase/config";
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

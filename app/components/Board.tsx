@@ -20,10 +20,11 @@ import { arrayMove } from "@dnd-kit/sortable";
 import RowContainer from "./RowContainer";
 import SortableCard from "./SortableCard";
 import WataPiModal from "../ui/WataPiModal";
-import { fireConfetti } from "./lib/fire";
+// import { fireConfetti } from "./lib/fire";
 import { Game } from "../interfaces/Game";
 import { Row, Sortable } from "../interfaces/types";
 import QrModal from "../ui/QrModal";
+import { fireConfetti } from "@/lib/fire";
 
 export default function Board({ game }: { game: Game }) {
   const rows = [
