@@ -8,7 +8,6 @@ import Spinner from "./ui/Spinner";
 import { UserCredential } from "firebase/auth";
 
 async function addStuff(userCredential: UserCredential) {
-  console.log("User", userCredential.user);
   try {
     const docRef = await setDoc(doc(db, "users", userCredential.user.uid), {
       id: userCredential.user.uid,
