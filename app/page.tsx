@@ -2,7 +2,7 @@
 import { use, useEffect, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, signInAnonymously, db } from "@/lib/firebase/firebase";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, setDoc, doc } from "firebase/firestore";
 import CareerWrapper from "./ui/CareerWrapper";
 import Spinner from "./ui/Spinner";
 import { UserCredential } from "firebase/auth";
@@ -10,11 +10,10 @@ import { UserCredential } from "firebase/auth";
 async function addStuff(userCredential: UserCredential) {
   console.log("User", userCredential.user);
   try {
-    const docRef = await addDoc(collection(db, "users"), {
+    const docRef = await setDoc(doc(db, "users", userCredential.user.uid), {
       id: userCredential.user.uid,
       gamesComplete: [],
     });
-    console.log("Document written with ID: ", docRef.id);
   } catch (e) {
     console.error("Error adding document: ", e);
   }
@@ -26,7 +25,6 @@ export default function Home() {
 
   useEffect(() => {
     if (loading) {
-      // console.log("loading....");
       return;
     } else if (!user) {
       signInAnonymously(auth).then((userCredential) => {
