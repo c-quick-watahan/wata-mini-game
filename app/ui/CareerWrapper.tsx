@@ -29,12 +29,6 @@ export default function CareerWrapper() {
       {careers.map((career) => (
         <CareerCard key={career.careerId} careerId={career.careerId} />
       ))}
-      <button
-        onClick={() => addUserGames(user ? user : null)}
-        className="btn bg-white btn-ghost text-[#0066A5] text-lg"
-      >
-        Add Game
-      </button>
     </div>
   );
 }

@@ -26,7 +26,35 @@ import { Row, Sortable } from "../interfaces/types";
 import QrModal from "../ui/QrModal";
 import { fireConfetti } from "@/lib/fire";
 
+// Firebase
+import { getAuth, User } from "firebase/auth";
+import {
+  arrayUnion,
+  collection,
+  doc,
+  getDoc,
+  updateDoc,
+} from "firebase/firestore";
+import { db } from "@/lib/firebase/firebase";
+
 export default function Board({ game }: { game: Game }) {
+  const auth = getAuth();
+  const user = auth.currentUser;
+
+  async function addUserGames() {
+    if (user) {
+      const userRef = doc(collection(db, "users"), user?.uid);
+      const docSnap = await getDoc(userRef);
+
+      const userData = docSnap.data();
+      if (userData && !userData.gamesComplete.includes(game.gameId)) {
+        await updateDoc(userRef, {
+          gamesComplete: arrayUnion(game.gameId), // Add the game to the user's gamesComplete array
+        });
+      } else console.log("Game already exists in the games array.");
+    }
+  }
+
   const rows = [
     { id: "top", title: "Row 1" },
     { id: "bottom", title: "Row 2" },
@@ -58,6 +86,7 @@ export default function Board({ game }: { game: Game }) {
         }
       }
       setTimeout(() => {
+        addUserGames();
         fireConfetti();
         setModalVisibility(true);
       }, 500);
