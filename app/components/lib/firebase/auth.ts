@@ -12,7 +12,6 @@ const firestore = getFirestore(app);
 export async function getSignedInUser() {
   try {
     const userCredential = await signInAnonymously(auth);
-    console.log("User", userCredential.user);
   } catch (error) {
     console.error("Error signing in anonymously:", error);
   }
