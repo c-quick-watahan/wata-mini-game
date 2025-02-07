@@ -1,16 +1,26 @@
 import CareerCard from "./CareerCard";
 import { careers } from "../interfaces/Game";
 import { auth, signInAnonymously, db } from "@/lib/firebase/firebase";
-import { collection, addDoc, getDocs, setDoc, doc } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  setDoc,
+  doc,
+  updateDoc,
+  arrayUnion,
+} from "firebase/firestore";
 
 const user = auth.currentUser;
 
-async function findUserGames() {
-  // console.log("User", user?.uid);
-  const querySnapshot = await getDocs(collection(db, "users"));
-  querySnapshot.forEach((doc) => {
-    console.log(`${doc.id} => ${doc.data()}`);
-  });
+export async function addUserGames() {
+  if (user) {
+    const userRef = doc(db, "users", user?.uid);
+    await updateDoc(userRef, {
+      gamesComplete: arrayUnion(-1),
+    });
+    // console.log(user.uid);
+  }
 }
 
 export default function CareerWrapper() {
@@ -24,7 +34,7 @@ export default function CareerWrapper() {
       ))}
       <button
         onClick={() => {
-          findUserGames();
+          addUserGames();
         }}
         className="btn bg-white btn-ghost text-[#0066A5] text-lg"
       >
