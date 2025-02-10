@@ -1,11 +1,12 @@
 "use client";
-import { use, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, signInAnonymously, db } from "@/lib/firebase/firebase";
-import { collection, addDoc, setDoc, doc } from "firebase/firestore";
+import { collection, setDoc, doc, getDocs } from "firebase/firestore";
 import CareerWrapper from "./ui/CareerWrapper";
 import Spinner from "./ui/Spinner";
 import { UserCredential } from "firebase/auth";
+import { Career } from "./interfaces/Game";
 
 async function addStuff(userCredential: UserCredential) {
   try {
@@ -22,6 +23,20 @@ export default function Home() {
   const [user, loading] = useAuthState(auth);
   const [error, setError] = useState(null);
 
+  const [careers, setCareers] = useState<Career[]>([]);
+  useEffect(() => {
+    async function getCareers() {
+      const querySnapshot = await getDocs(collection(db, "careers"));
+      const careersList: Career[] = [];
+      querySnapshot.forEach((doc) => {
+        const data = doc.data() as Career;
+        careersList.push(data);
+      });
+      setCareers(careersList);
+    }
+    getCareers();
+  }, []);
+
   useEffect(() => {
     if (loading) {
       return;
@@ -34,5 +49,5 @@ export default function Home() {
     }
   }, [loading]);
   if (error) return <p>Error: {error}</p>;
-  return <div>{user ? <CareerWrapper /> : <Spinner />}</div>;
+  return <div>{user ? <CareerWrapper careers={careers} /> : <Spinner />}</div>;
 }
