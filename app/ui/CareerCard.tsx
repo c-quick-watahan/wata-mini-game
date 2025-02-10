@@ -1,13 +1,12 @@
 import React from "react";
-import { careers } from "../interfaces/Game";
 import Link from "next/link";
-import { Id } from "../interfaces/types";
+import { Career } from "../interfaces/Game";
 
-export default function CareerCard({ careerId }: { careerId: Id }) {
-  const career = careers.find((career) => career.careerId === careerId);
+export default function CareerCard({ career }: { career: Career | undefined }) {
+  if (!career) return null;
   return (
     <div
-      key={careerId}
+      key={career.careerId}
       className="card 
       bg-cyan-200 
       shadow-cyan-500/50 
@@ -25,7 +24,7 @@ export default function CareerCard({ careerId }: { careerId: Id }) {
         <h2 className="card-title">{career?.careerName}</h2>
       </div>
       <div className="pb-2">
-        <Link href={`/${careerId}`}>
+        <Link href={`/${career.careerId}`}>
           <button className="btn btn-primary p-">Play</button>
         </Link>
       </div>
