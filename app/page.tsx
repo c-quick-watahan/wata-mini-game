@@ -7,7 +7,6 @@ import CareerWrapper from "./ui/CareerWrapper";
 import Spinner from "./ui/Spinner";
 import { UserCredential } from "firebase/auth";
 import { Career } from "./interfaces/Game";
-import StartButtonModal from "./ui/StartButtonModal";
 
 async function addStuff(userCredential: UserCredential) {
   try {
@@ -23,11 +22,6 @@ async function addStuff(userCredential: UserCredential) {
 export default function Home() {
   const [user, loading] = useAuthState(auth);
   const [error, setError] = useState(null);
-  const [startModalVisible, setStartModalVisible] = useState(true);
-
-  function flipModal() {
-    setStartModalVisible(!startModalVisible);
-  }
 
   const [careers, setCareers] = useState<Career[]>([]);
   useEffect(() => {
@@ -57,7 +51,6 @@ export default function Home() {
   if (error) return <p>Error: {error}</p>;
   return (
     <div>
-      {startModalVisible && <StartButtonModal flipModal={flipModal} />}
       {user ? <CareerWrapper key={0} careers={careers} /> : <Spinner />}
     </div>
   );
