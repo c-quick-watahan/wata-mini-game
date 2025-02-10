@@ -5,7 +5,6 @@ export interface Game {
   gameId: Id;
   name: string;
   filename: string;
-  answerArray?: Id[];
   sortableItems?: Sortable[];
 }
 
