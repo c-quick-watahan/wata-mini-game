@@ -49,5 +49,9 @@ export default function Home() {
     }
   }, [loading]);
   if (error) return <p>Error: {error}</p>;
-  return <div>{user ? <CareerWrapper careers={careers} /> : <Spinner />}</div>;
+  return (
+    <div>
+      {user ? <CareerWrapper key={0} careers={careers} /> : <Spinner />}
+    </div>
+  );
 }
