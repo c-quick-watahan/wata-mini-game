@@ -1,21 +1,9 @@
-import { Sortable } from "./types";
+import { initializeApp } from "firebase/app";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { Career } from "../interfaces/Game";
+import { firebaseConfig } from "@/lib/firebase/config";
 
-export type Id = string | number;
-export interface Game {
-  gameId: Id;
-  name: string;
-  filename: string;
-  answerArray?: Id[];
-  sortableItems?: Sortable[];
-}
-
-export interface Career {
-  careerId: Id;
-  careerName?: string;
-  games?: Game[];
-}
-
+const app = initializeApp(firebaseConfig);
 const db = getFirestore();
 
 export const careers: Career[] = [
