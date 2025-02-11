@@ -1,3 +1,4 @@
+import { Id } from "@/app/interfaces/types";
 import GameWrapper from "@/app/ui/GameWrapper";
 
 export default async function Page({
