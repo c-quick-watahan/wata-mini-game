@@ -28,32 +28,7 @@ export default function SortableCard({ sortable, game }: Props) {
     },
   });
 
-  // const storage = getStorage();
-  // // console.log("storage", storage);
-
-  // const folderRef = ref(storage, `/${game.filename}`);
-  // // const fileRef = ref(storage, `/${folderRef}/${sortable.content}`);
-  // const gsReference = ref(
-  //   storage,
-  //   `gs://${process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET}/${game.filename}/${sortable.content}}`
-  // );
-  // // console.log("gsReference", gsReference);
-  // useEffect(() => {
-  //   listAll(folderRef)
-  //     .then((res) => {
-  //       res.prefixes.forEach((fileRef) => {
-  //         // All the prefixes under listRef.
-  //         console.log("fileRef", fileRef);
-  //         // You may call listAll() recursively on them.
-  //       });
-  //       // Process the items if needed
-  //       console.log("items", res.items);
-  //     })
-  //     .catch(() => {
-  //       // Uh-oh, an error occurred!
-  //     });
-  // }, []);
-  const imageUrl = `https://firebasestorage.googleapis.com/v0/b/watahan-mini-game.firebasestorage.app/o/${game.filename}%2F${sortable.content}?alt=media`;
+  const imageUrl = `https://firebasestorage.googleapis.com/v0/b/${process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET}/o/${game.filename}%2F${sortable.content}?alt=media`;
   const style = {
     transition: transition || undefined,
     transform: CSS.Transform.toString(transform),
@@ -89,7 +64,6 @@ export default function SortableCard({ sortable, game }: Props) {
         >
           <Image
             src={imageUrl}
-            // src={`/${game.filename}/${sortable.content}`}
             alt={`${sortable.title}`}
             layout="responsive" // Make the image responsive
             width={200} // Set the intrinsic width of the image (for aspect ratio)
