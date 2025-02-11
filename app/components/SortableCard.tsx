@@ -1,11 +1,12 @@
 "use client";
-import React from "react";
+import React, { use, useEffect } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import Image from "next/image";
 import { Sortable } from "../interfaces/types";
 import { Game } from "../interfaces/Game";
-
+import { getDownloadURL, getStorage, listAll, ref } from "firebase/storage";
+import { get } from "http";
 interface Props {
   sortable: Sortable;
   game: Game;
@@ -27,6 +28,32 @@ export default function SortableCard({ sortable, game }: Props) {
     },
   });
 
+  // const storage = getStorage();
+  // // console.log("storage", storage);
+
+  // const folderRef = ref(storage, `/${game.filename}`);
+  // // const fileRef = ref(storage, `/${folderRef}/${sortable.content}`);
+  // const gsReference = ref(
+  //   storage,
+  //   `gs://${process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET}/${game.filename}/${sortable.content}}`
+  // );
+  // // console.log("gsReference", gsReference);
+  // useEffect(() => {
+  //   listAll(folderRef)
+  //     .then((res) => {
+  //       res.prefixes.forEach((fileRef) => {
+  //         // All the prefixes under listRef.
+  //         console.log("fileRef", fileRef);
+  //         // You may call listAll() recursively on them.
+  //       });
+  //       // Process the items if needed
+  //       console.log("items", res.items);
+  //     })
+  //     .catch(() => {
+  //       // Uh-oh, an error occurred!
+  //     });
+  // }, []);
+  const imageUrl = `https://firebasestorage.googleapis.com/v0/b/watahan-mini-game.firebasestorage.app/o/${game.filename}%2F${sortable.content}?alt=media`;
   const style = {
     transition: transition || undefined,
     transform: CSS.Transform.toString(transform),
@@ -61,7 +88,8 @@ export default function SortableCard({ sortable, game }: Props) {
           }}
         >
           <Image
-            src={`/${game.filename}/${sortable.content}`}
+            src={imageUrl}
+            // src={`/${game.filename}/${sortable.content}`}
             alt={`${sortable.title}`}
             layout="responsive" // Make the image responsive
             width={200} // Set the intrinsic width of the image (for aspect ratio)
