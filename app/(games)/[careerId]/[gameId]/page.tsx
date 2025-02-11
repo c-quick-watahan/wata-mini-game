@@ -11,10 +11,31 @@ export default function Page() {
   const { careerId, gameId } = useParams();
   const [game, setGame] = useState<Game>();
   const [startModalVisible, setStartModalVisible] = useState(true);
+  const [startTime, setStartTime] = useState(0);
+  const [endTime, setEndTime] = useState(0);
+  const [timeElapsed, setTimeElapsed] = useState(0);
 
   function flipModal() {
     setStartModalVisible(!startModalVisible);
+    setStartTime(Date.now());
   }
+
+  // Timer functions
+  function end() {
+    setEndTime(Date.now());
+  }
+  useEffect(() => {
+    console.log("Start Time: ", startTime);
+  }, [startTime]);
+  useEffect(() => {
+    console.log("End Time: ", endTime);
+    setTimeElapsed(Math.abs(endTime - startTime) / 1000); // gotta be positive
+  }, [endTime]);
+  useEffect(() => {
+    console.log("Elapsed: ", timeElapsed);
+  }, [timeElapsed]);
+
+  // Get the game data
   useEffect(() => {
     async function getCareers() {
       if (!careerId) return;
@@ -37,7 +58,7 @@ export default function Page() {
     <>
       {startModalVisible && <StartButtonModal flipModal={flipModal} />}
       <div id="page" className=" flex justify-center">
-        {game && <Board game={game} />}
+        {game && <Board game={game} end={end} />}
       </div>
     </>
   );

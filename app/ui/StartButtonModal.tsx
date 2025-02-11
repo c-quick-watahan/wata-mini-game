@@ -1,3 +1,6 @@
+"use client";
+import { getAuth } from "firebase/auth";
+
 interface StartButtonModalProps {
   flipModal: () => void;
 }
@@ -11,7 +14,9 @@ export default function StartButtonModal(props: StartButtonModalProps) {
         className="fixed inset-0 flex flex-col justify-center items-center bg-cover bg-center backdrop-blur-md z-40"
       >
         <button
-          onClick={flipModal}
+          onClick={() => {
+            flipModal();
+          }}
           className="btn btn-outline btn-lg btn-success"
         >
           Start
