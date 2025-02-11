@@ -37,7 +37,7 @@ import {
 } from "firebase/firestore";
 import { db } from "@/lib/firebase/firebase";
 
-export default function Board({ game }: { game: Game }) {
+export default function Board({ game, end }: { game: Game; end: () => void }) {
   const auth = getAuth();
   const user = auth.currentUser;
 
@@ -85,6 +85,7 @@ export default function Board({ game }: { game: Game }) {
           return;
         }
       }
+      end();
       setTimeout(() => {
         addUserGames();
         fireConfetti();
