@@ -1,4 +1,3 @@
-import { Id } from "../d-sort/types";
 import GameWrapper from "@/app/ui/GameWrapper";
 
 export default async function Page({
