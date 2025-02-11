@@ -11,6 +11,7 @@ export default function WataPiModal({
   showQR,
   filename,
 }: WataPiModalProps) {
+  const videoUrl = `https://firebasestorage.googleapis.com/v0/b/${process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET}/o/${filename}%2F${filename}.mp4?alt=media`;
   return (
     <>
       <div
@@ -18,8 +19,7 @@ export default function WataPiModal({
         className="fixed inset-0 flex flex-col justify-center items-center bg-cover bg-center backdrop-blur-md z-40"
       >
         <video className="w-[50vw] h-[50vh] block mx-auto relative" controls>
-          <source src={`/${filename}/${filename}.mp4`} type="video/mp4" />
-          Your browser does not support the video tag.
+          <source src={videoUrl} type="video/mp4" />
         </video>
         <div className="relative mt-4 flex space-x-4 z-40">
           <Link href="/">

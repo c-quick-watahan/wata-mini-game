@@ -5,8 +5,7 @@ import { CSS } from "@dnd-kit/utilities";
 import Image from "next/image";
 import { Sortable } from "../interfaces/types";
 import { Game } from "../interfaces/Game";
-import { getDownloadURL, getStorage, listAll, ref } from "firebase/storage";
-import { get } from "http";
+
 interface Props {
   sortable: Sortable;
   game: Game;

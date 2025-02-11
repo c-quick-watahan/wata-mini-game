@@ -7,6 +7,7 @@ interface QrModalProps {
 }
 
 export default function QrModal({ flipQR, filename }: QrModalProps) {
+  const imageUrl = `https://firebasestorage.googleapis.com/v0/b/${process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET}/o/${filename}%2F${filename}_coupon_qr.png?alt=media`;
   return (
     <>
       <div
@@ -14,7 +15,8 @@ export default function QrModal({ flipQR, filename }: QrModalProps) {
         className="gap-2 fixed inset-0 flex flex-col justify-center items-center bg-cover bg-center backdrop-blur-md z-50"
       >
         <Image
-          src={`/${filename}/${filename}_coupon_qr.png`} // Set the image source
+          // src={`/${filename}/${filename}_coupon_qr.png`} // Set the image source
+          src={imageUrl}
           alt={`${filename}_coupon_qr`}
           // layout="responsive" // Make the image responsive
           width={500} // Set the intrinsic width of the image (for aspect ratio)
