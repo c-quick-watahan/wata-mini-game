@@ -10,7 +10,7 @@ import { Career } from "./interfaces/Game";
 
 async function addStuff(userCredential: UserCredential) {
   try {
-    const docRef = await setDoc(doc(db, "users", userCredential.user.uid), {
+    await setDoc(doc(db, "users", userCredential.user.uid), {
       id: userCredential.user.uid,
       gamesComplete: [],
     });
@@ -21,7 +21,6 @@ async function addStuff(userCredential: UserCredential) {
 
 export default function Home() {
   const [user, loading] = useAuthState(auth);
-  const [error, setError] = useState(null);
 
   const [careers, setCareers] = useState<Career[]>([]);
   useEffect(() => {
@@ -48,7 +47,7 @@ export default function Home() {
       return;
     }
   }, [loading]);
-  if (error) return <p>Error: {error}</p>;
+
   return (
     <div>
       {user ? <CareerWrapper key={0} careers={careers} /> : <Spinner />}

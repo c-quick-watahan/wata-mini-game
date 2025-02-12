@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Game, Id } from "../interfaces/Game";
 import GameCard from "./GameCard";
 
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { collection, doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase/firebase";
 
 export default function GameWrapper({ careerId }: { careerId: Id }) {
