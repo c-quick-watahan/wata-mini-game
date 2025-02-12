@@ -1,5 +1,6 @@
 "use client";
-import React, { useState, useCallback, useEffect, useId } from "react";
+import { useState, useCallback, useEffect, useId } from "react";
+import React from "react";
 
 // Third-party components
 import {
@@ -27,7 +28,7 @@ import QrModal from "../ui/QrModal";
 import { fireConfetti } from "@/lib/fire";
 
 // Firebase
-import { getAuth, User } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import {
   arrayUnion,
   collection,

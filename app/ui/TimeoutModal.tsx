@@ -1,5 +1,4 @@
 "use client";
-import { getAuth } from "firebase/auth";
 
 interface TimeoutModalProps {
   closeTimeoutModal: () => void;

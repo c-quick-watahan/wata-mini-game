@@ -8,7 +8,8 @@ import { db } from "@/lib/firebase/firebase";
 
 import { collection, doc, getDoc } from "firebase/firestore";
 import { useParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import React from "react";
 import { useStopwatch } from "react-timer-hook";
 
 export default function Page() {
@@ -20,7 +21,7 @@ export default function Page() {
   const [timeElapsed, setTimeElapsed] = useState(0);
   const [timeoutModalVisible, setTimeoutModalVisible] = useState(false);
 
-  const { seconds, minutes, start, pause, reset } = useStopwatch({
+  const { seconds, minutes, start, pause } = useStopwatch({
     autoStart: false,
   });
 
